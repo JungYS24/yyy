@@ -16,13 +16,28 @@ public class ProjectileMove : MonoBehaviour
 
         if (collision.gameObject.name == "Monster")
         {
-            collision.gameObject.GetComponent<MonsterController>().Damanged(1);
+            collision.gameObject.GetComponent<MonsterController>().Mpnster_Damaged(1);
             Destroy(this.gameObject);
         }
 
+    }
+
+    private void OnTrigerEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (other.gameObject.tag == "Monster")
+        {
+            other.gameObject.GetComponent<MonsterController>().Mpnster_Damaged(1);
+            Destroy(this.gameObject);
+        }
 
     }
-    public void FixedUpdate()
+
+        private void FixedUpdate()
     {
         float moveAmount = 3 * Time.fixedDeltaTime;
         transform.Translate(launchDirection * moveAmount);
