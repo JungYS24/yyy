@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1.0f;                              //이동 속도 변수 선언
+    public float moveSpeed = 6;                              //이동 속도 변수 선언
     public GameObject PlayerPivot;                              //플레이어 피봇 선언
     Camera viewCamera;                                          //카메라 정보 값을 가져오기 위해 선언
     Vector3 velocity;                                           //이동 방향 벡터 값 선언
-    public ProjectileController projectileController;           //발사 컨트롤 클래스 접근
+    public ProjectileController projectileController;       //발사 컨트롤 클래스 접근
+
+    public int Player_Hp = 50;
+  
+    public void Damaged(int damage)
+    {
+        Player_Hp -= damage;
+
+        if (Player_Hp <= 0)
+        {
+            GameObject temp = this.gameObject;
+            Destroy(temp);
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
